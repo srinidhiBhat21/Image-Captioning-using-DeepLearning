@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-BLIP Image Captioning Backend API
-Flask server for handling image captioning requests using BLIP model
-"""
-
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from PIL import Image
@@ -16,13 +10,12 @@ import base64
 from werkzeug.utils import secure_filename
 import logging
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing for frontend communication
+CORS(app)  
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
@@ -32,10 +25,8 @@ MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10MB max file size
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
-# Create upload directory if it doesn't exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Global variables for model (loaded once at startup)
 processor = None
 model = None
 device = None
@@ -290,4 +281,5 @@ if __name__ == '__main__':
         )
     else:
         logger.error("❌ Failed to initialize application")
+
         exit(1)
