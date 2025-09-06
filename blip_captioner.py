@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-BLIP Image Captioner Class
-Handles image captioning using BLIP model
-"""
 
 import torch
 from PIL import Image
@@ -151,3 +146,4 @@ class BLIPImageCaptioner:
             
         except Exception as e:
             print(f"Error saving caption: {e}")
+
