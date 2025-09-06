@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLIP Image Captioning - AI Powered</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-camera-retro"></i> AI Image Captioning</h1>
+                <p>Upload an image and get an AI-generated caption using the BLIP deep learning model</p>
+                <div class="model-info">
+                    <span class="badge">BLIP Model</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Drop your image here or click to browse</h3>
+                        <p>Supports: JPG, PNG, GIF, BMP (Max: 10MB)</p>
+                        <div class="file-types">
+                            <span>.jpg</span>
+                            <span>.png</span>
+                            <span>.gif</span>
+                            <span>.bmp</span>
+                        </div>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </div>
+
+                <!-- Prompt Input Section -->
+                <div class="prompt-section">
+                    <div class="prompt-header">
+                        <label for="promptInput">
+                            <i class="fas fa-magic"></i> Optional Prompt
+                        </label>
+                        <span class="tooltip" title="Guide the AI's caption style">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="promptInput" 
+                        placeholder="e.g., 'a photography of', 'a painting of', 'an image showing'"
+                        maxlength="100"
+                    >
+                    <small>Leave empty for unconditional captioning</small>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generateBtn" class="generate-btn" disabled>
+                    <i class="fas fa-sparkles"></i>
+                    <span>Generate Caption</span>
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-container">
+                    <!-- Image Preview -->
+                    <div class="image-preview">
+                        <img id="previewImage" alt="Uploaded Image">
+                        <div class="image-info">
+                            <span id="imageSize"></span>
+                            <span id="imageDimensions"></span>
+                        </div>
+                    </div>
+
+                    <!-- Caption Results -->
+                    <div class="caption-results">
+                        <div class="caption-header">
+                            <h3><i class="fas fa-quote-left"></i> Generated Caption</h3>
+                            <div class="loading" id="loadingSpinner" style="display: none;">
+                                <div class="spinner"></div>
+                                <span>AI is analyzing your image...</span>
+                            </div>
+                        </div>
+
+                        <div class="caption-content">
+                            <div class="caption-text" id="captionText">
+                                Click "Generate Caption" to analyze your image
+                            </div>
+                            <div class="caption-actions">
+                                <button id="copyBtn" class="action-btn copy-btn" title="Copy to clipboard">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <button id="shareBtn" class="action-btn share-btn" title="Share caption">
+                                    <i class="fas fa-share-alt"></i>
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="performance-info" id="performanceInfo" style="display: none;">
+                            <div class="perf-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Inference Time: <strong id="inferenceTime">--</strong></span>
+                            </div>
+                            <div class="perf-item">
+                                <i class="fas fa-microchip"></i>
+                                <span>Device: <strong id="deviceInfo">--</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="history-section">
+                <div class="history-header">
+                    <h3><i class="fas fa-history"></i> Recent Captions</h3>
+                    <button id="clearHistoryBtn" class="clear-btn">
+                        <i class="fas fa-trash-alt"></i> Clear All
+                    </button>
+                </div>
+                <div id="historyList" class="history-list">
+                    <div class="empty-history">
+                        <i class="fas fa-image"></i>
+                        <p>No captions generated yet. Upload an image to get started!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Caption copied to clipboard!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
